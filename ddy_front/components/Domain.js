@@ -1,20 +1,20 @@
 import { useEffect, useState } from 'react'
 import { ethers } from 'ethers'
 
-const Domain = ({ domain, ethDaddy, provider, id }) => {
+const Domain = ({ domain, dDaddy, provider, id }) => {
   const [owner, setOwner] = useState(null)
   const [hasSold, setHasSold] = useState(false)
 
   const getOwner = async () => {
     if (domain.isOwned || hasSold) {
-      const owner = await ethDaddy.ownerOf(id)
+      const owner = await dDaddy.ownerOf(id)
       setOwner(owner)
     }
   }
 
   const buyHandler = async () => {
     const signer = await provider.getSigner()
-    const transaction = await ethDaddy.connect(signer).mint(id, { value: domain.cost })
+    const transaction = await dDaddy.connect(signer).mint(id, { value: domain.cost })
     await transaction.wait()
 
     setHasSold(true)
