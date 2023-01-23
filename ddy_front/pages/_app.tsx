@@ -27,7 +27,7 @@ declare global {
 }
 
 export default function App({ Component, pageProps }: AppProps) {
-  const contractAddress = "0x236Da9a165aAc9388CEe9F830e039Bd9EC4b12f2";
+  const contractAddress = "0x33f9b0669e69325aD97c54ebb53d21fc9c8f5C43";
   const contractABI = abi.abi;
 
   const [provider, setProvider] = useState<any>("")
@@ -37,15 +37,15 @@ export default function App({ Component, pageProps }: AppProps) {
   const [domains, setDomains] = useState<any[]>([]);
 
   const loadBlockchainData = async () => {
-    const provider = ((window.ethereum != null) ? new ethers.providers.Web3Provider(window.ethereum) : ethers.providers.getDefaultProvider());
+    const provider = new ethers.providers.Web3Provider(window.ethereum)
     setProvider(provider)
 
+    const network = await provider.getNetwork()
     const dDaddy = new ethers.Contract(
       contractAddress, 
       contractABI,
       provider
     );
-    
     setDomainDaddy(dDaddy)
 
     const maxSupply = await dDaddy.maxSupply()
@@ -99,17 +99,10 @@ export default function App({ Component, pageProps }: AppProps) {
         </div>
       </main>
 
-      <footer className="footer">
-        <a
-          href=""
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <span className="logo">
-            <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-          </span>
-        </a>
+      <footer>
+        <span className='cards__description'>
+          Powered by {'Domain Daddy'}
+        </span>
       </footer>
 
     </div>

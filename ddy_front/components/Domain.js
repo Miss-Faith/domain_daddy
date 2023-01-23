@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { ethers } from 'ethers'
 
 const Domain = ({ domain, dDaddy, provider, id }) => {
-  const [owner, setOwner] = useState(null)
+  const [owner, setOwner] = useState("")
   const [hasSold, setHasSold] = useState(false)
 
   const getOwner = async () => {
