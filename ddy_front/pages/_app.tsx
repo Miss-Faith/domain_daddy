@@ -27,7 +27,7 @@ declare global {
 }
 
 export default function App({ Component, pageProps }: AppProps) {
-  const contractAddress = "0x33f9b0669e69325aD97c54ebb53d21fc9c8f5C43";
+  const contractAddress = "0xb7ae0bDDf7351915A857c7dA0f7D2bE2bE82d763";
   const contractABI = abi.abi;
 
   const [provider, setProvider] = useState<any>("")

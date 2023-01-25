@@ -24,8 +24,8 @@ async function main() {
   console.log(`Deployed Domain Contract at: ${dDaddy.address}\n`)
 
   // List 6 domains
-  const names = ["jack.eth", "john.eth", "henry.eth", "cobalt.eth", "oxygen.eth", "carbon.eth"]
-  const costs = [tokens(10), tokens(25), tokens(15), tokens(2.5), tokens(0.3), tokens(0.1)]
+  const names = ["jack.eth", "john.eth", "henry.eth", "cobalt.eth", "oxygen.eth", "carbon.eth", "silver.eth"]
+  const costs = [tokens(10), tokens(25), tokens(15), tokens(2.5), tokens(3), tokens(0.1), tokens(0.12)]
 
   for (var i = 0; i < 6; i++) {
     const transaction = await dDaddy.connect(deployer).list(names[i], costs[i])
