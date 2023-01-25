@@ -1,4 +1,5 @@
 import { ethers } from 'ethers';
+import Link from 'next/link'
 // import logo from '../assets/logo.svg';
 
 const Navigation = ({ account, setAccount }) => {
@@ -15,10 +16,11 @@ const Navigation = ({ account, setAccount }) => {
         <h1>Domain Daddy</h1>
 
         <ul className='nav__links'>
-          <li><a href="/">Domain Names</a></li>
-          <li><a href="/">Websites & Hosting</a></li>
-          <li><a href="/">Commerce</a></li>
-          <li><a href="/">Email & Marketing</a></li>
+          nav__links
+          <li><Link href="/">Domain Names</Link></li>
+          <li><Link href="/">Websites & Hosting</Link></li>
+          <li><Link href="/">Commerce</Link></li>
+          <li><Link href="/">Email & Marketing</Link></li>
         </ul>
       </div>
 
