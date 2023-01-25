@@ -27,8 +27,8 @@ declare global {
 }
 
 export default function App({ Component, pageProps }: AppProps) {
-  const contractAddress = "0xb7ae0bDDf7351915A857c7dA0f7D2bE2bE82d763";
-  const contractABI = abi.abi;
+  // const contractAddress = "0xb7ae0bDDf7351915A857c7dA0f7D2bE2bE82d763";
+  // const contractABI = abi.abi;
 
   const [provider, setProvider] = useState<any>("")
   const [account, setAccount] = useState("")
@@ -36,38 +36,70 @@ export default function App({ Component, pageProps }: AppProps) {
   const [dDaddy, setDomainDaddy] = useState<any>("")
   const [domains, setDomains] = useState<any[]>([]);
 
-  const loadBlockchainData = async () => {
-    const provider = new ethers.providers.Web3Provider(window.ethereum)
-    setProvider(provider)
+  // const loadBlockchainData = async () => {
+  //   const provider = new ethers.providers.Web3Provider(window.ethereum)
+  //   setProvider(provider)
 
-    const network = await provider.getNetwork()
-    const dDaddy = new ethers.Contract(
-      contractAddress, 
-      contractABI,
-      provider
-    );
-    setDomainDaddy(dDaddy)
+  //   const network = await provider.getNetwork()
+  //   const dDaddy = new ethers.Contract(
+  //     contractAddress, 
+  //     contractABI,
+  //     provider
+  //   );
+  //   setDomainDaddy(dDaddy)
 
-    const maxSupply = await dDaddy.maxSupply()
-    const domains = []
+  //   const maxSupply = await dDaddy.maxSupply()
+  //   const domains = []
 
-    for (var i = 1; i <= maxSupply; i++) {
-      const domain = await dDaddy.getDomain(i)
-      domains.push(domain)
-    }
+  //   for (var i = 1; i <= maxSupply; i++) {
+  //     const domain = await dDaddy.getDomain(i)
+  //     domains.push(domain)
+  //   }
 
-    setDomains(domains)
+  //   setDomains(domains)
 
-    window.ethereum.on('accountsChanged', async () => {
-      const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-      const account = ethers.utils.getAddress(accounts[0])
-      setAccount(account);
-    })
-  }
+  //   window.ethereum.on('accountsChanged', async () => {
+  //     const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+  //     const account = ethers.utils.getAddress(accounts[0])
+  //     setAccount(account);
+  //   })
+  // }
+
 
   useEffect(() => {
+    const contractAddress = "0xb7ae0bDDf7351915A857c7dA0f7D2bE2bE82d763";
+    const contractABI = abi.abi;
+    const loadBlockchainData = async () => {
+      const provider = new ethers.providers.Web3Provider(window.ethereum)
+      setProvider(provider)
+  
+      const network = await provider.getNetwork()
+      const dDaddy = new ethers.Contract(
+        contractAddress, 
+        contractABI,
+        provider
+      );
+      setDomainDaddy(dDaddy)
+  
+      const maxSupply = await dDaddy.maxSupply()
+      const domains = []
+  
+      for (var i = 1; i <= maxSupply; i++) {
+        const domain = await dDaddy.getDomain(i)
+        domains.push(domain)
+      }
+  
+      setDomains(domains)
+  
+      window.ethereum.on('accountsChanged', async () => {
+        const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+        const account = ethers.utils.getAddress(accounts[0])
+        setAccount(account);
+      })
+    }
     loadBlockchainData()
   }, [])
+
   return (
     <div>
       <Head>
